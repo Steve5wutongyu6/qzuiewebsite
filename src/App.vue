@@ -3,6 +3,7 @@
 import TopNavBox from "./components/top-nav-box.vue";
 import NavList from "./components/nav-list.vue";
 import BannerBox from "./components/banner-box.vue";
+import Footer from "./components/Footer.vue";
 
 </script>
 
@@ -22,6 +23,8 @@ import BannerBox from "./components/banner-box.vue";
     </div>
 
   </div>
+
+  <Footer/>
 </template>
 
 <style scoped>.app-container {
@@ -74,5 +77,6 @@ import BannerBox from "./components/banner-box.vue";
   z-index: 1000;
   pointer-events: auto; /* ✅ 重新启用交互 */
 }
+
 </style>
 
