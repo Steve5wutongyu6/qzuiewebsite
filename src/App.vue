@@ -4,7 +4,25 @@ import TopNavBox from "./components/top-nav-box.vue";
 import NavList from "./components/nav-list.vue";
 import BannerBox from "./components/banner-box.vue";
 import Footer from "./components/Footer.vue";
+import Test from "./components/Test.vue";
+import NavTopfileBox from "./components/nav-topfile-box.vue";
+import {onMounted, onUnmounted, ref} from "vue";
 
+/*滚动监听逻辑*/
+const isScrolled = ref(false);
+const scrollThreshold = 100; // 滚动阈值（像素）
+
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > scrollThreshold;
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 </script>
 
 <template>
@@ -16,14 +34,26 @@ import Footer from "./components/Footer.vue";
       <div class="gradient-overlay"></div>
     </div>
 
-    <!-- 单独保留 header 内容层（可交互） -->
+    <!-- 动态导航栏 -->
     <div class="interactive-header">
-      <top-nav-box />
-      <nav-list />
-    </div>
+      <transition name="fade">
+        <div class="header-wrapper">
+          <top-nav-box v-if="!isScrolled" />
+          <nav-list v-if="!isScrolled" />
+        </div>
+      </transition>
+      <transition name="fade">
+        <nav-topfile-box v-show="isScrolled" :style="{ opacity: isScrolled ? 1 : 0 }" />
+      </transition>
 
+    </div>
   </div>
 
+
+  <Test/>
+  <div class="test-box">
+    <Test/>
+  </div>
   <Footer/>
 </template>
 
@@ -78,5 +108,31 @@ import Footer from "./components/Footer.vue";
   pointer-events: auto; /* ✅ 重新启用交互 */
 }
 
+.test-box {
+  position: relative;
+  width: 100%;
+  pointer-events: auto;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+
+.interactive-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: background 0.3s ease;
+}
+
+.interactive-header.scrolled {
+  background: #ffffff !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
 </style>
 

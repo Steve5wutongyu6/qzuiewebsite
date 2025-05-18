@@ -29,35 +29,35 @@
                   <!-- 链接项 -->
                   <div class="link-item col-lg-6 col-6 col-sm-4 my-1">
                     <img src="../assets/img/foot1.png" alt="教务系统">
-                    <a href="https://jwgl.qzuie.edu.cn/Logon.do?method=logon&amp;issso=1">教务系统</a>
+                    <a class="link-items-a" href="https://jwgl.qzuie.edu.cn/Logon.do?method=logon&amp;issso=1">教务系统</a>
                   </div>
                   <div class="link-item col-lg-6 col-6 col-sm-4 my-1">
                     <img src="../assets/img/foot5.png" alt="成果展示">
-                    <a href="">成果展示</a>
+                    <a class="link-items-a" href="">成果展示</a>
                   </div>
                   <div class="link-item col-lg-6 col-6 col-sm-4 my-1">
                     <img src="../assets/img/foot2.png" alt="教学平台">
-                    <a href="http://qziedu.fy.chaoxing.com/portal">教学平台</a>
+                    <a class="link-items-a" href="http://qziedu.fy.chaoxing.com/portal">教学平台</a>
                   </div>
                   <div class="link-item col-lg-6 col-6 col-sm-4 my-1">
                     <img src="../assets/img/foot6.png" alt="校务公开">
-                    <a href="">校务公开</a>
+                    <a class="link-items-a" href="">校务公开</a>
                   </div>
                   <div class="link-item col-lg-6 col-6 col-sm-4 my-1">
                     <img src="../assets/img/foot3.png" alt="OA平台">
-                    <a href="http://oa.qzuie.edu.cn:9081/">OA平台</a>
+                    <a class="link-items-a" href="http://oa.qzuie.edu.cn:9081/">OA平台</a>
                   </div>
                   <div class="link-item col-lg-6 col-6 col-sm-4 my-1">
                     <img src="../assets/img/foot7.png" alt="电子邮件">
-                    <a href="https://mail.qzuie.edu.cn/">电子邮件</a>
+                    <a class="link-items-a" href="https://mail.qzuie.edu.cn/">电子邮件</a>
                   </div>
                   <div class="link-item col-lg-6 col-6 col-sm-4 my-1">
                     <img src="../assets/img/foot4.png" alt="图书馆">
-                    <a href="https://lib.qzuie.edu.cn">图书馆</a>
+                    <a class="link-items-a" href="https://lib.qzuie.edu.cn">图书馆</a>
                   </div>
                   <div class="link-item col-lg-6 col-6 col-sm-4 my-1">
                     <img src="../assets/img/foot8.png" alt="校报">
-                    <a href="https://xcb.qzuie.edu.cn/news-list-qxxb.html">校报</a>
+                    <a class="link-items-a" href="https://xcb.qzuie.edu.cn/news-list-qxxb.html">校报</a>
                   </div>
                 </div>
               </div>
@@ -70,7 +70,7 @@
       </div>
 
       <!-- 版权信息 -->
-      <div class="copyright">版权所有 © 泉州信息工程学院 备案号：闽ICP备05015349号</div>
+      <div class="copyright">2203260111 吴同宇 版权所有 © 泉州信息工程学院 备案号：闽ICP备05015349号</div>
     </div>
   </footer>
 </template>
@@ -147,7 +147,10 @@ footer  {
   }
 }
 
-
+footer .link-item {
+  display: flex;
+  align-items: center; /* 垂直居中 */
+}
 
 footer .link-box{
   padding-left: 50px;
@@ -167,5 +170,15 @@ footer .copyright {
 footer .col-lg-6 {
   font-family: 'Raleway', sans-serif;
   text-size: 50px;
+
+}
+
+
+
+footer .link-items-a {
+  text-decoration: none;
+  vertical-align: baseline;
+  display: inline-flex; /* 确保 a 元素内部内容也能垂直居中 */
+  align-items: center;
 }
 </style>
