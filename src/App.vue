@@ -8,6 +8,9 @@ import NavTopfileBox from "./components/nav-topfile-box.vue";
 import {onMounted, onUnmounted, ref} from "vue";
 import SpecialColumn from "./components/SpecialColumn.vue";
 import FeaturesOfQzuie from "./components/FeaturesOfQzuie.vue";
+import TeachingandResearch from "./components/TeachingandResearch.vue";
+import IntheMedia from "./components/IntheMedia.vue";
+import QUIENews from "./components/QUIENews.vue";
 
 /*滚动监听逻辑*/
 const isScrolled = ref(false);
@@ -52,6 +55,9 @@ onUnmounted(() => {
 
 
   <div class="contentbox">
+    <QUIENews/>
+    <IntheMedia/>
+    <TeachingandResearch/>
     <FeaturesOfQzuie/>
     <special-column/>
   </div>

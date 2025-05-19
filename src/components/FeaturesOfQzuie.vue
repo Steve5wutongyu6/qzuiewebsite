@@ -20,19 +20,19 @@ export default {
 </script>
 
 <template>
-  <div class="qxts-box aos-init aos-animate" data-aos="fade-up">
+  <div class="standard-content-box aos-init aos-animate" data-aos="fade-up">
     <div class="main-title container">
       <div class="title-img">
         <span>Features of QUIE</span>
         <h1>泉信特色</h1>
       </div>
       <div class="more-box">
-        <img :src="titleIcon" alt="title icon" />
+        <img :src="titleIcon" alt="title icon"/>
         <a href="https://gjc.qzuie.edu.cn/">查看更多</a>
       </div>
       <div class="line-box"></div>
       <div class="meng-img">
-        <img :src="mengImage" alt="meng" />
+        <img :src="mengImage" alt="meng"/>
       </div>
     </div>
     <div class="container">
@@ -123,27 +123,28 @@ body[data-aos-duration="1000"] [data-aos] {
   pointer-events: none;
 }
 
-.qxts-box {
+.standard-content-box {
   font-family: sans-serif;
   padding-top: 30px;
   padding-bottom: 30px;
 }
 
 .main-title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  margin: 3.55rem auto 1rem auto;
   position: relative;
-  text-align: center;
-  margin-bottom: 40px;
+  padding-bottom: 1.5rem;
 }
 
 .main-title .title-img {
-  display: inline-block;
-  position: relative;
+  text-align: left;
 }
 
 .main-title .title-img span {
   font-size: 18px;
   color: #777;
-  display: block;
 }
 
 .main-title .title-img h1 {
@@ -154,10 +155,6 @@ body[data-aos-duration="1000"] [data-aos] {
 }
 
 .main-title .more-box {
-  position: absolute;
-  top: 50%;
-  right: 15px;
-  transform: translateY(-50%);
   display: flex;
   align-items: center;
 }
@@ -172,6 +169,7 @@ body[data-aos-duration="1000"] [data-aos] {
   font-size: 16px;
   color: #007bff;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .main-title .more-box a:hover {
@@ -179,26 +177,27 @@ body[data-aos-duration="1000"] [data-aos] {
 }
 
 .main-title .line-box {
-  height: 2px;
-  background-color: #eee;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #dee2e6;
 }
 
 .main-title .meng-img {
   position: absolute;
-  bottom: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
+  right: 0; /* 右侧对齐 */
 }
 
 .main-title .meng-img img {
-  height: 30px;
+  height: 50px;
   display: block;
+}
+
+.title-img  {
+  width: 190px;
+  white-space: nowrap;
 }
 
 .white-panel {
@@ -213,7 +212,7 @@ body[data-aos-duration="1000"] [data-aos] {
 }
 
 .white-panel:hover {
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .white-panel.all .thumb {
@@ -277,19 +276,22 @@ body[data-aos-duration="1000"] [data-aos] {
     max-width: 540px;
   }
 }
+
 @media (min-width: 768px) {
   .container {
     max-width: 720px;
   }
 }
+
 @media (min-width: 992px) {
   .container {
     max-width: 960px;
   }
 }
+
 @media (min-width: 1200px) {
   .container {
-    max-width: 1140px;
+    max-width: 1440px;
   }
 }
 
@@ -319,9 +321,9 @@ body[data-aos-duration="1000"] [data-aos] {
   margin-bottom: 0.5rem !important;
 }
 
-.qxts-box *,
-.qxts-box *::before,
-.qxts-box *::after {
+.standard-content-box *,
+.standard-content-box *::before,
+.standard-content-box *::after {
   box-sizing: border-box;
 }
 </style>
