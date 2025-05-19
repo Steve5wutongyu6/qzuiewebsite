@@ -7,6 +7,7 @@ import Footer from "./components/Footer.vue";
 import NavTopfileBox from "./components/nav-topfile-box.vue";
 import {onMounted, onUnmounted, ref} from "vue";
 import SpecialColumn from "./components/SpecialColumn.vue";
+import FeaturesOfQzuie from "./components/FeaturesOfQzuie.vue";
 
 /*滚动监听逻辑*/
 const isScrolled = ref(false);
@@ -51,6 +52,7 @@ onUnmounted(() => {
 
 
   <div class="contentbox">
+    <FeaturesOfQzuie/>
     <special-column/>
   </div>
 

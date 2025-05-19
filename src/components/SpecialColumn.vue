@@ -181,7 +181,7 @@ export default {
 
 .tit > div {
   padding-left: 8.48px;
-  display: flex;
+  display: block;
   align-items: center;
 }
 
