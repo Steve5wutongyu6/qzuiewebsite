@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 
 </script>
 
 <template>
   <div class="nav-list container">
     <nav class="navbar navbar-default navbar-mobile bootsnav on">
-      <div class="collapse navbar-collapse show" id="navbar-menu">
+      <div id="navbar-menu" class="collapse navbar-collapse show">
         <ul class="nav navbar-nav" data-in="fadeInDown" data-out="fadeOutUp">
           <li class="dropdown">
             <a href="news-list-xxgk.html">学校概况<span></span></a>

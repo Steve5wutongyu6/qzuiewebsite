@@ -4,9 +4,9 @@ import TopNavBox from "./components/top-nav-box.vue";
 import NavList from "./components/nav-list.vue";
 import BannerBox from "./components/banner-box.vue";
 import Footer from "./components/Footer.vue";
-import Test from "./components/Test.vue";
 import NavTopfileBox from "./components/nav-topfile-box.vue";
 import {onMounted, onUnmounted, ref} from "vue";
+import SpecialColumn from "./components/SpecialColumn.vue";
 
 /*滚动监听逻辑*/
 const isScrolled = ref(false);
@@ -50,10 +50,10 @@ onUnmounted(() => {
   </div>
 
 
-  <Test/>
-  <div class="test-box">
-    <Test/>
+  <div class="contentbox">
+    <special-column/>
   </div>
+
   <Footer/>
 </template>
 
@@ -108,7 +108,7 @@ onUnmounted(() => {
   pointer-events: auto; /* ✅ 重新启用交互 */
 }
 
-.test-box {
+.contentbox {
   position: relative;
   width: 100%;
   pointer-events: auto;
