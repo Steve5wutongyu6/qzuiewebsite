@@ -3,7 +3,7 @@ import titleIconPath from '../assets/img/title-icon.png';
 import mengImagePath from '../assets/img/meng.png';
 
 export default {
-  name: 'SpecialColumn',
+  name: 'IntheMedia',
   data() {
     return {
       titleIcon: titleIconPath,

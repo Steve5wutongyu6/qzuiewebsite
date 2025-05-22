@@ -12,5 +12,3 @@ AOS.init({
     offset: 120,      // 偏移量
     once: true        // 是否只执行一次
 })
-
-app.mount('#app')

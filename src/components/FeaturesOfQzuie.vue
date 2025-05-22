@@ -6,7 +6,7 @@ import qxts2ImagePath from '../assets/img/qxts2.png';
 import qxts3ImagePath from '../assets/img/qxts3.png';
 
 export default {
-  name: 'SpecialColumn',
+  name: 'FeaturesofQUIE',
   data() {
     return {
       titleIcon: titleIconPath,

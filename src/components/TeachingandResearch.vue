@@ -3,7 +3,7 @@ import titleIconPath from '../assets/img/title-icon.png';
 import mengImagePath from '../assets/img/meng.png';
 
 export default {
-  name: 'SpecialColumn',
+  name: 'TeachingandResearch',
   data() {
     return {
       titleIcon: titleIconPath,
@@ -35,10 +35,7 @@ export default {
         <div class="col-lg-6 mb-4">
           <div class="white-panel all h-100">
             <!-- 左侧内容区 -->
-            <div class="p-4">
-              <h3 class="mb-3">教学特色</h3>
-              <p>这里是教学特色内容区域，支持多行文本展示...</p>
-            </div>
+
           </div>
         </div>
 
