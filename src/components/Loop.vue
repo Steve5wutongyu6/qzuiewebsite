@@ -1,278 +1,272 @@
-<template>
-  <!-- 去掉 data-ride="carousel" 属性，仅保留 "carousel" 类用于 CSS -->
-  <div id="myCustomCarousel" class="carousel">
-    <!-- 分页指示器（右下角、横线样式） -->
-    <ol class="carousel-indicators custom-indicators">
-      <li
-          v-for="(slide, index) in slides"
-          :key="index"
-          :class="{ active: currentSlide === index }"
-          @click="goToSlide(index)"
-      ></li>
-    </ol>
-
-    <!-- 轮播内容 -->
-    <div class="carousel-inner">
-      <div
-          v-for="(slide, index) in slides"
-          :key="index"
-          :class="['carousel-item', { active: currentSlide === index }]"
-          :data-aos="aosAnimation"
-      >
-        <!-- 图片链接 & 背景图 -->
-        <a
-            :href="slide.link"
-            :style="{ backgroundImage: 'url(' + slide.image + ')' }"
-            class="carousel-item-img"
-        ></a>
-
-        <!-- 左下角标题 -->
-        <div class="image-label">
-          <p>{{ slide.title }}</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- 左右切换按钮 -->
-    <button
-        class="carousel-control-prev"
-        type="button"
-        @click="prevSlide"
-    >
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span> <!-- 提高可访问性 -->
-    </button>
-    <button
-        class="carousel-control-next"
-        type="button"
-        @click="nextSlide"
-    >
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span> <!-- 提高可访问性 -->
-    </button>
-  </div>
-</template>
-
-<script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+<script>
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-// 示例轮播数据：标题由用户自定义
-const slides = [
-  {
-    image: new URL('../assets/img/1.jpg', import.meta.url).href,
-    title: '我是图片一的标题',
-    link: 'https://example.com/1'  // 移除链接末尾的空格
+// 导入图片
+import img1 from '../assets/img/1.jpg';
+import img2 from '../assets/img/2.jpg';
+import img3 from '../assets/img/3.jpg';
+
+export default {
+  name: 'Loop',
+  setup() {
+    const currentIndex = ref(0);
+    const slides = [
+      {
+        image: img1,
+        title: '标题1',
+        link: 'https://example.com/link1',
+      },
+      {
+        image: img2,
+        title: '标题2',
+        link: 'https://example.com/link2',
+      },
+      {
+        image: img3,
+        title: '标题3',
+        link: 'https://example.com/link3',
+      },
+    ];
+
+    let slideInterval = null;
+
+    const nextSlide = () => {
+      currentIndex.value = (currentIndex.value + 1) % slides.length;
+    };
+
+    const prevSlide = () => {
+      currentIndex.value = (currentIndex.value - 1 + slides.length) % slides.length;
+    };
+
+    const goToSlide = (index) => {
+      currentIndex.value = index;
+    };
+
+    const startSlide = () => {
+      slideInterval = setInterval(nextSlide, 5000); // 每5秒切换一次
+    };
+
+    const stopSlide = () => {
+      if (slideInterval) {
+        clearInterval(slideInterval);
+      }
+    };
+
+    onMounted(() => {
+      AOS.init({
+        duration: 1000, // 动画持续时间
+        once: true, // 动画只执行一次
+      });
+      startSlide();
+    });
+
+    onBeforeUnmount(() => {
+      stopSlide();
+    });
+
+    // 计算幻灯片的位移
+    const slideStyle = computed(() => {
+      return {
+        transform: `translateX(-${currentIndex.value * 100}%)`,
+      };
+    });
+
+    return {
+      currentIndex,
+      slides,
+      nextSlide,
+      prevSlide,
+      goToSlide,
+      slideStyle,
+    };
   },
-  {
-    image: new URL('../assets/img/2.jpg', import.meta.url).href,
-    title: '我是图片二的标题',
-    link: 'https://example.com/2'
-  },
-  {
-    image: new URL('../assets/img/3.jpg', import.meta.url).href,
-    title: '我是图片三的标题',
-    link: 'https://example.com/3'
-  }
-];
-
-const currentSlide = ref(0);
-const intervalTime = 5000; // 自动播放间隔（毫秒）
-let slideInterval = null;
-const aosAnimation = 'fade-up'; // AOS动画类型
-
-/** 跳转到指定索引的幻灯片 */
-const goToSlide = (index) => {
-  console.log('跳转到幻灯片索引:', index);  // 调试用
-  currentSlide.value = index;
-  resetInterval();
 };
-
-/** 上一张 */
-const prevSlide = () => {
-  currentSlide.value = (currentSlide.value - 1 + slides.length) % slides.length;
-  resetInterval();
-};
-
-/** 下一张 */
-const nextSlide = () => {
-  currentSlide.value = (currentSlide.value + 1) % slides.length;
-  resetInterval();
-};
-
-/** 清除并重启自动播放 */
-const resetInterval = () => {
-  clearInterval(slideInterval);
-  startInterval();
-};
-
-/** 开始自动播放 */
-const startInterval = () => {
-  slideInterval = setInterval(nextSlide, intervalTime);
-};
-
-onMounted(() => {
-  // 初始化 AOS（如果需要的话）
-  AOS.init({
-    duration: 1000,
-    once: false
-  });
-
-  // 启动自定义自动轮播
-  startInterval();
-});
-
-onUnmounted(() => {
-  // 页面卸载时停止计时器
-  clearInterval(slideInterval);
-});
 </script>
 
+<template>
+  <div class="carousel-container" data-aos="fade-up">
+    <div class="carousel">
+      <!-- 幻灯片包装器 -->
+      <div class="carousel-slides" :style="slideStyle">
+        <!-- 轮播项 -->
+        <div
+            class="carousel-slide"
+            v-for="(slide, index) in slides"
+            :key="index"
+        >
+          <a :href="slide.link" class="carousel-item-img" :style="{ backgroundImage: `url(${slide.image})` }"></a>
+          <div class="carousel-caption">
+            <p>{{ slide.title }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 分页指示器 -->
+      <ol class="carousel-indicators">
+        <li
+            v-for="(slide, index) in slides"
+            :key="index"
+            :class="{ active: index === currentIndex }"
+            @click="goToSlide(index)"
+        ></li>
+      </ol>
+
+      <!-- 左右切换按钮 -->
+      <button class="carousel-control prev" @click="prevSlide" aria-label="Previous">
+        <span class="control-icon prev-icon" aria-hidden="true"></span>
+      </button>
+      <button class="carousel-control next" @click="nextSlide" aria-label="Next">
+        <span class="control-icon next-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</template>
+
+
 <style scoped>
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
 .carousel {
   position: relative;
   width: 100%;
-  overflow: hidden;
+  height: 524px;
 }
 
-/* 轮播内部结构保持不变，高度可自定义 */
-.carousel-inner {
-  position: relative;
-  height: 400px;
+.carousel-slides {
+  display: flex;
   width: 100%;
-  overflow: hidden;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
 }
 
-.carousel-item {
+.carousel-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* 确保图片在背景层 */
+.carousel-item-img {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.carousel-item.active {
-  opacity: 1;
-  z-index: 1;
-}
-
-.carousel-item-img {
-  display: block;
-  width: 100%;
-  height: 400px;
+  height: 100%;
   background-size: cover;
   background-position: center;
+  z-index: 1; /* 设置较低的 z-index */
 }
 
-/* 左下角标题 */
-.image-label {
-  position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  z-index: 2;
-  font-size: 1rem;
-  color: #fff;
-  text-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.5);
-}
-
-/* 可根据需要保留或删除此“原轮播标题” */
+/* 确保标题在图片之上 */
 .carousel-caption {
   position: absolute;
-  bottom: 2rem;
-  right: 1.5rem; /* 也可以 left，随需求修改 */
-  z-index: 2;
-  max-width: 50%;
-  text-align: right;
+  left: 0;
+  bottom: 10px;
+  width: 100%;
+  padding: 10px 20px;
+  background: transparent;
+  color: #fffce1;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  z-index: 2; /* 设置较高的 z-index */
 }
+
 .carousel-caption p {
-  font-size: 1.25rem;
-  color: #fff;
   margin: 0;
-  text-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.5);
+  font-size: 1.2rem;
 }
 
-/* 分页指示器改成三个横线（—— —— ——）并移到右下角 */
-.carousel-indicators.custom-indicators {
+.carousel-indicators {
   position: absolute;
-  bottom: 1rem;
-  right: 1rem; /* 如果想改在左下角，可改 left:1rem; right:auto; */
-  left: auto;
-  margin: 0;
-  padding: 0;
+  right: 1.5rem; /* 调整右边距 */
+  bottom: 10px;
+  display: flex;
+  gap: 8px;
   list-style: none;
-  display: flex; /* 横向排列 */
-  flex-direction: row;
-  z-index: 2;
 }
 
-/* 短横线指示器样式 */
-.carousel-indicators.custom-indicators li {
+.carousel-indicators li {
+  width: 30px; /* 设置为横条的宽度 */
+  height: 4px; /* 设置为横条的高度 */
+  background-color: rgba(255, 255, 255, 0.5); /* 默认灰白色 */
   cursor: pointer;
-  background: none;
-  border: none;
-  border-radius: 0;
-  width: auto;
-  height: auto;
-  margin: 0 0.3rem; /* 两条线之间的间距 */
-  position: relative;
+  transition: background-color 0.3s;
+  border-radius: 2px; /* 轻微圆角 */
 }
 
-/* 用伪元素添加“—”字符 */
-.carousel-indicators.custom-indicators li::before {
-  content: '—';
-  color: #fff;
-  font-size: 1.25rem;
-  font-weight: 400;
-  transition: all 0.3s ease;
+.carousel-indicators li.active {
+  background-color: rgba(255, 255, 255, 1); /* 活跃状态为白色 */
 }
 
-/* 当前激活线条更粗或更大 */
-.carousel-indicators.custom-indicators li.active::before {
-  font-weight: 900; /* 加粗 */
-  font-size: 1.5rem; /* 放大 */
-  color: #fff;
-}
-
-/* 去除超级链接文字“Previous / Next” */
-.carousel-control-prev,
-.carousel-control-next {
+.carousel-control {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px; /* 调整按钮宽度 */
+  height: 50px; /* 调整按钮高度 */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 15%;
-  padding: 0;
-  background: none;
-  border: 0;
-  opacity: 0.5;
-  transition: opacity 0.15s ease;
+  border-radius: 50%; /* 圆形按钮 */
+  z-index: 3; /* 确保控制按钮在最前 */
 }
 
-.carousel-control-prev:hover,
-.carousel-control-next:hover {
+.carousel-control:hover {
   opacity: 1;
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  display: inline-block;
-  width: 2rem;
-  height: 2rem;
-  background: no-repeat center center;
-  background-size: 100% 100%;
+.carousel-control.prev {
+  left: 10px;
 }
 
-/* 可选：调整按钮图标，可以根据需要自定义 */
-.carousel-control-prev-icon {
-  background-image: url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTguMjUsMjBDMTguMjUsMjAsMTguMjUsMjAsMTAuMjUsMTEuMDg2OTkxMjM3MzQ5MjI5MjIsczIsMlMyNywwLDQwMHssIHRvIDU2MnK0oIk5MZV0vdHV0YT4iLz48L3N2Zz4='); /* 替换为实际图标 */
+.carousel-control.next {
+  right: 10px;
 }
 
-.carousel-control-next-icon {
-  background-image: url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSwxMCBjLTIuMTAxNSwwLTMsMi44OC00LDUgMS40MSwzLjEgNC4xMSw1LDU1LC4gKj0wLjIgSDFgiLz48L3N2Zz4='); /* 替换为实际图标 */
+.control-icon {
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.prev-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' width='20' height='20' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5L4.25 4l2.5-2.5L5.25 0z'/%3e%3c/svg%3e");
+}
+
+.next-icon {
+  background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http://www.w3.org/2000/svg%22%20fill%3D%22%23fff%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%208%208%22%3E%3Cpath%20d%3D%22M2.75%200l-1.5%201.5L3.75%204l-2.5%202.5L2.75%208l4-4-4-4z%22/%3E%3C/svg%3E');
+}
+
+/* 可选：调整标题的样式以提高可读性 */
+@media (max-width: 768px) {
+  .carousel-caption p {
+    font-size: 1rem;
+  }
+
+  .carousel-control {
+    width: 40px;
+    height: 40px;
+  }
+
+  .control-icon {
+    width: 16px;
+    height: 16px;
+  }
 }
 </style>
