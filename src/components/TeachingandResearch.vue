@@ -1,9 +1,11 @@
 <script>
 import titleIconPath from '../assets/img/title-icon.png';
 import mengImagePath from '../assets/img/meng.png';
+import LoopImg from "./LoopImg.vue";
 
 export default {
   name: 'TeachingandResearch',
+  components: {LoopImg},
   data() {
     return {
       titleIcon: titleIconPath,
@@ -35,7 +37,7 @@ export default {
         <div class="col-lg-6 mb-4">
           <div class="white-panel all h-100">
             <!-- 左侧内容区 -->
-
+            <LoopImg/>
           </div>
         </div>
 
