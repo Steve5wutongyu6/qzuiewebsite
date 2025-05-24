@@ -1,15 +1,36 @@
 <script>
 import titleIconPath from '../assets/img/title-icon.png';
 import mengImagePath from '../assets/img/meng.png';
+// 导入轮播图片
+import img1 from '../assets/img/fc3b55c6f2.jpeg';
+import img2 from '../assets/img/1811d5467f.jpg';
+import img3 from '../assets/img/21660adb8b.jpg';
 import Loop from "./Loop.vue";
 
 export default {
   name: 'TeachingandResearch',
-  components: {Loop},
+  components: { Loop },
   data() {
     return {
       titleIcon: titleIconPath,
-      mengImage: mengImagePath
+      mengImage: mengImagePath,
+      slides: [
+        {
+          image: img1,
+          title: '福建省教师教学创新大赛，泉信获奖！',
+          link: 'https://mp.weixin.qq.com/s/QaVchhCqiyg5tPgFF9J9Cw',
+        },
+        {
+          image: img2,
+          title: '165个奖项！“蓝桥杯”大赛泉信学子获佳绩！',
+          link: 'https://mp.weixin.qq.com/s/flOOKNTxxUNz3GF7WOKinw',
+        },
+        {
+          image: img3,
+          title: '市调逐梦 青春焕彩｜我校成功举办“正大杯”第十五届全国大学生市场调查与分析大赛省赛 ',
+          link: 'https://mp.weixin.qq.com/s/jcwdxtOGvOc82Tt-WlAhHw',
+        },
+      ],
     };
   },
 };
@@ -23,12 +44,12 @@ export default {
         <h1>教学科研</h1>
       </div>
       <div class="more-box">
-        <img :src="titleIcon" alt="title icon"/>
+        <img :src="titleIcon" alt="title icon" />
         <a href="https://www.qzuie.edu.cn/news-list-jiaoxuekeyan.html">查看更多</a>
       </div>
       <div class="line-box"></div>
       <div class="meng-img">
-        <img :src="mengImage" alt="meng"/>
+        <img :src="mengImage" alt="meng" />
       </div>
     </div>
     <div class="container">
@@ -37,7 +58,7 @@ export default {
         <div class="col-lg-6 mb-4">
           <div class="white-panel left-pannel all h-100">
             <!-- 左侧内容区 -->
-            <Loop/>
+            <Loop :slides="slides" />
           </div>
         </div>
 
@@ -48,33 +69,39 @@ export default {
               <div class="list-box">
                 <div class="item">
                   <div class="img-box">
-                    <img src="../assets/img/85f1d1f3d2.jpg" alt="新闻图片">
+                    <img src="../assets/img/85f1d1f3d2.jpg" alt="新闻图片" />
                   </div>
                   <div class="txt-box">
                     <div class="txt">
-                      <a href="https://mp.weixin.qq.com/s/3R4z__y9Twpe8v7FKCqW5g">两份榜单出炉，泉信拿下双第一！</a>
+                      <a href="https://mp.weixin.qq.com/s/3R4z__y9Twpe8v7FKCqW5g">
+                        两份榜单出炉，泉信拿下双第一！
+                      </a>
                       <span>2025.04.16</span>
                     </div>
                   </div>
                 </div>
                 <div class="item">
                   <div class="img-box">
-                    <img src="../assets/img/43424ef12d.jpeg" alt="新闻图片">
+                    <img src="../assets/img/43424ef12d.jpeg" alt="新闻图片" />
                   </div>
                   <div class="txt-box">
                     <div class="txt">
-                      <a href="https://mp.weixin.qq.com/s/7ZF6ZLi-HIfATmsdjn0sIw">千余所高校角逐，泉信斩获16个奖项！</a>
+                      <a href="https://mp.weixin.qq.com/s/7ZF6ZLi-HIfATmsdjn0sIw">
+                        千余所高校角逐，泉信斩获16个奖项！
+                      </a>
                       <span>2025.04.02</span>
                     </div>
                   </div>
                 </div>
                 <div class="item">
                   <div class="img-box">
-                    <img src="../assets/img/341e2ef8d4.jpg" alt="新闻图片">
+                    <img src="../assets/img/341e2ef8d4.jpg" alt="新闻图片" />
                   </div>
                   <div class="txt-box">
                     <div class="txt">
-                      <a href="https://mp.weixin.qq.com/s/aUzuEO9HyHWmRJOwNbHB2w">把课堂搬进传统历史街区，这样的实践教学你心动了吗？</a>
+                      <a href="https://mp.weixin.qq.com/s/aUzuEO9HyHWmRJOwNbHB2w">
+                        把课堂搬进传统历史街区，这样的实践教学你心动了吗？
+                      </a>
                       <span>2025.03.26</span>
                     </div>
                   </div>
@@ -83,11 +110,10 @@ export default {
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+      </div> <!-- end of row -->
+    </div> <!-- end of container -->
+  </div> <!-- end of standard-content-box -->
 </template>
-
 
 <style scoped>
 .standard-content-box {
@@ -173,7 +199,6 @@ export default {
   white-space: nowrap;
 }
 
-
 .container {
   width: 100%;
   padding-right: 15px;
@@ -230,17 +255,17 @@ export default {
   }
 }
 
-.white-panel.right-panel{
-  background-color: rgb(123,198,233,1);
+.white-panel.right-panel {
+  background-color: rgba(123, 198, 233, 1);
   overflow: hidden;
   transition: box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
 }
 
-.white-panel.left-pannel{
+.white-panel.left-pannel {
   background-color: #fff; /* 或者你想要的颜色，比如透明 transparent */
-  overflow: visible;      /* 确保轮播图不被裁切 */
+  overflow: visible; /* 确保轮播图不被裁切 */
   z-index: 200;
 }
 
@@ -271,8 +296,6 @@ carouselExampleIndicators2 {
   margin: 0;
 }
 
-
-
 .list-box {
   display: flex;
   flex-direction: column;
@@ -283,7 +306,7 @@ carouselExampleIndicators2 {
   display: flex;
   align-items: center;
   height: 8.55rem;
-  border-bottom: 1px solid #D6D6D6;
+  border-bottom: 1px solid #d6d6d6;
   color: #fff;
 }
 
@@ -341,5 +364,4 @@ carouselExampleIndicators2 {
   flex-direction: column;
   height: 100%; /* 父容器占满 */
 }
-
 </style>

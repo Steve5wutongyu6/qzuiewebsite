@@ -1,9 +1,11 @@
 <script>
 import titleIconPath from '../assets/img/title-icon.png';
 import mengImagePath from '../assets/img/meng.png';
+import NewsLoop from "./NewsLoop.vue";
 
 export default {
   name: 'IntheMedia',
+  components: {NewsLoop},
   data() {
     return {
       titleIcon: titleIconPath,
@@ -30,7 +32,7 @@ export default {
       </div>
     </div>
     <div class="container">
-
+      <NewsLoop/>
     </div>
   </div>
 </template>
@@ -103,6 +105,7 @@ export default {
   position: absolute;
   right: 0; /* 右侧对齐 */
 }
+
 .main-title .meng-img img {
   height: 50px;
   display: block;

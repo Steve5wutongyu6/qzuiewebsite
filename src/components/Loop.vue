@@ -3,41 +3,34 @@ import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-// 导入图片
-import img1 from '../assets/img/1.jpg';
-import img2 from '../assets/img/2.jpg';
-import img3 from '../assets/img/3.jpg';
-
 export default {
   name: 'Loop',
-  setup() {
+  props: {
+    slides: {
+      type: Array,
+      required: true,
+      validator: (value) => {
+        return value.every(
+            (slide) =>
+                typeof slide.image === 'string' &&
+                typeof slide.title === 'string' &&
+                typeof slide.link === 'string'
+        );
+      },
+    },
+  },
+  setup(props) {
     const currentIndex = ref(0);
-    const slides = [
-      {
-        image: img1,
-        title: '标题1',
-        link: 'https://example.com/link1',
-      },
-      {
-        image: img2,
-        title: '标题2',
-        link: 'https://example.com/link2',
-      },
-      {
-        image: img3,
-        title: '标题3',
-        link: 'https://example.com/link3',
-      },
-    ];
 
     let slideInterval = null;
 
     const nextSlide = () => {
-      currentIndex.value = (currentIndex.value + 1) % slides.length;
+      currentIndex.value = (currentIndex.value + 1) % props.slides.length;
     };
 
     const prevSlide = () => {
-      currentIndex.value = (currentIndex.value - 1 + slides.length) % slides.length;
+      currentIndex.value =
+          (currentIndex.value - 1 + props.slides.length) % props.slides.length;
     };
 
     const goToSlide = (index) => {
@@ -75,7 +68,6 @@ export default {
 
     return {
       currentIndex,
-      slides,
       nextSlide,
       prevSlide,
       goToSlide,
@@ -96,7 +88,11 @@ export default {
             v-for="(slide, index) in slides"
             :key="index"
         >
-          <a :href="slide.link" class="carousel-item-img" :style="{ backgroundImage: `url(${slide.image})` }"></a>
+          <a
+              :href="slide.link"
+              class="carousel-item-img"
+              :style="{ backgroundImage: `url(${slide.image})` }"
+          ></a>
           <div class="carousel-caption">
             <p>{{ slide.title }}</p>
           </div>
@@ -114,16 +110,23 @@ export default {
       </ol>
 
       <!-- 左右切换按钮 -->
-      <button class="carousel-control prev" @click="prevSlide" aria-label="Previous">
+      <button
+          class="carousel-control prev"
+          @click="prevSlide"
+          aria-label="Previous"
+      >
         <span class="control-icon prev-icon" aria-hidden="true"></span>
       </button>
-      <button class="carousel-control next" @click="nextSlide" aria-label="Next">
+      <button
+          class="carousel-control next"
+          @click="nextSlide"
+          aria-label="Next"
+      >
         <span class="control-icon next-icon" aria-hidden="true"></span>
       </button>
     </div>
   </div>
 </template>
-
 
 <style scoped>
 .carousel-container {
@@ -174,12 +177,13 @@ export default {
   width: 100%;
   padding: 10px 20px;
   background: transparent;
-  color: #fffce1;
+  color: white;
   display: flex;
   justify-content: left;
   align-items: center;
   z-index: 2; /* 设置较高的 z-index */
 }
+
 
 .carousel-caption p {
   margin: 0;
