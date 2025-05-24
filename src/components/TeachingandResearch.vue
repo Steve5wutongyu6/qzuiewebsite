@@ -1,11 +1,11 @@
 <script>
 import titleIconPath from '../assets/img/title-icon.png';
 import mengImagePath from '../assets/img/meng.png';
-import LoopImg from "./LoopImg.vue";
+import Loop from "./Loop.vue";
 
 export default {
   name: 'TeachingandResearch',
-  components: {LoopImg},
+  components: {Loop},
   data() {
     return {
       titleIcon: titleIconPath,
@@ -35,14 +35,14 @@ export default {
       <!-- 两栏布局 -->
       <div class="row">
         <div class="col-lg-6 mb-4">
-          <div class="white-panel all h-100">
+          <div class="white-panel left-pannel all h-100">
             <!-- 左侧内容区 -->
-            <LoopImg/>
+            <Loop/>
           </div>
         </div>
 
         <div class="col-lg-6 mb-4">
-          <div class="white-panel all h-100">
+          <div class="white-panel right-panel all h-100">
             <!-- 右侧内容区 -->
             <div class="p-4">
               <div class="list-box">
@@ -230,7 +230,7 @@ export default {
   }
 }
 
-.white-panel {
+.white-panel.right-panel{
   background-color: rgb(123,198,233,1);
   overflow: hidden;
   transition: box-shadow 0.3s ease;
@@ -238,8 +238,18 @@ export default {
   flex-direction: column;
 }
 
+.white-panel.left-pannel{
+  background-color: #fff; /* 或者你想要的颜色，比如透明 transparent */
+  overflow: visible;      /* 确保轮播图不被裁切 */
+  z-index: 200;
+}
+
 .white-panel:hover {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+carouselExampleIndicators2 {
+  height: 100%;
 }
 
 /* 响应式间距优化 */
@@ -325,4 +335,11 @@ export default {
   color: white;
   margin-top: 0.5rem;
 }
+
+.white-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* 父容器占满 */
+}
+
 </style>
