@@ -178,7 +178,6 @@ html, body, div, span, header, ul, li, a {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
   font: inherit;
   vertical-align: baseline;
 }
@@ -297,7 +296,7 @@ body {
   width: 100%;
   height: 112px;
   background-color: rgb(248, 248, 251);
-  font-weight: bold; /* 使用font-weight替代font-family */
+  font-weight: bold;
   font-size: 16px;
   box-sizing: border-box;
   text-overflow: ellipsis;
@@ -382,10 +381,6 @@ body {
 
 /* 响应式设计（可选） */
 @media (max-width: 768px) {
-  .loop-container, .gsgg-box {
-    width: 100%;
-    height: auto;
-  }
 
   .white-panel {
     width: 100%;
