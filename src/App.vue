@@ -11,6 +11,7 @@ import FeaturesOfQzuie from "./components/FeaturesOfQzuie.vue";
 import TeachingandResearch from "./components/TeachingandResearch.vue";
 import IntheMedia from "./components/IntheMedia.vue";
 import QUIENews from "./components/QUIENews.vue";
+import BackgroundImg from "./assets/img/bg.png"
 
 /*滚动监听逻辑*/
 const isScrolled = ref(false);
@@ -34,7 +35,7 @@ onUnmounted(() => {
 
     <!-- 轮播图层：banner + 渐变 -->
     <div class="background-layer">
-      <banner-box class="background-banner" />
+      <banner-box class="background-banner"/>
       <div class="gradient-overlay"></div>
     </div>
 
@@ -42,12 +43,12 @@ onUnmounted(() => {
     <div class="interactive-header">
       <transition name="fade">
         <div class="header-wrapper">
-          <top-nav-box v-if="!isScrolled" />
-          <nav-list v-if="!isScrolled" />
+          <top-nav-box v-if="!isScrolled"/>
+          <nav-list v-if="!isScrolled"/>
         </div>
       </transition>
       <transition name="fade">
-        <nav-topfile-box v-show="isScrolled" :style="{ opacity: isScrolled ? 1 : 0 }" />
+        <nav-topfile-box v-show="isScrolled" :style="{ opacity: isScrolled ? 1 : 0 }"/>
       </transition>
 
     </div>
@@ -57,8 +58,10 @@ onUnmounted(() => {
   <div class="contentbox">
     <QUIENews/>
     <IntheMedia/>
-    <TeachingandResearch/>
-    <FeaturesOfQzuie/>
+    <div class="big-back">
+      <TeachingandResearch/>
+      <FeaturesOfQzuie/>
+    </div>
     <special-column/>
   </div>
 
@@ -125,6 +128,7 @@ onUnmounted(() => {
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.3s ease;
 }
+
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
 }
@@ -140,7 +144,11 @@ onUnmounted(() => {
 
 .interactive-header.scrolled {
   background: #ffffff !important;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.big-back {
+  background-image: url("./assets/img/bg.png");
 }
 </style>
 
