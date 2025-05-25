@@ -274,6 +274,7 @@ body {
 /* 缩略图样式 */
 .thumb {
   position: relative;
+  margin-top: -16.5px;
   width: 100%;
   padding-top: 56.25%; /* 16:9 Aspect Ratio */
   overflow: hidden; /* 防止图片溢出 */
@@ -326,6 +327,7 @@ body {
   height: 510px;
   background-color: #f8f9fa;
   padding: 15px;
+  margin-top: -12px;
   box-sizing: border-box;
 }
 
