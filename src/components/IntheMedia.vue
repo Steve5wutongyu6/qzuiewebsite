@@ -1,20 +1,4 @@
-<script>
-import titleIconPath from '../assets/img/title-icon.png';
-import mengImagePath from '../assets/img/meng.png';
-import NewsLoop from "./NewsLoop.vue";
-
-export default {
-  name: 'IntheMedia',
-  components: {NewsLoop},
-  data() {
-    return {
-      titleIcon: titleIconPath,
-      mengImage: mengImagePath
-    };
-  },
-};
-</script>
-
+<!-- IntheMedia.vue -->
 <template>
   <div class="standard-content-box aos-init aos-animate" data-aos="fade-up">
     <div class="main-title container">
@@ -23,19 +7,36 @@ export default {
         <h1>媒体泉信</h1>
       </div>
       <div class="more-box">
-        <img :src="titleIcon" alt="title icon"/>
+        <img :src="titleIcon" alt="title icon" />
         <a href="https://www.qzuie.edu.cn/news-list-jiaoxuekeyan.html">查看更多</a>
       </div>
       <div class="line-box"></div>
       <div class="meng-img">
-        <img :src="mengImage" alt="meng"/>
+        <img :src="mengImage" alt="meng" />
       </div>
     </div>
-    <div class="container">
-      <NewsLoop/>
+    <div class="full-width-container">
+      <NewsLoop />
     </div>
   </div>
 </template>
+
+<script>
+import titleIconPath from '../assets/img/title-icon.png';
+import mengImagePath from '../assets/img/meng.png';
+import NewsLoop from "./mtqx-box.vue";
+
+export default {
+  name: 'IntheMedia',
+  components: { NewsLoop },
+  data() {
+    return {
+      titleIcon: titleIconPath,
+      mengImage: mengImagePath
+    };
+  },
+};
+</script>
 
 <style scoped>
 .standard-content-box {
@@ -103,7 +104,7 @@ export default {
 
 .main-title .meng-img {
   position: absolute;
-  right: 0; /* 右侧对齐 */
+  right: 0;
 }
 
 .main-title .meng-img img {
@@ -115,7 +116,6 @@ export default {
   width: 190px;
   white-space: nowrap;
 }
-
 
 .container {
   width: 100%;
@@ -149,6 +149,14 @@ export default {
   }
 }
 
+.full-width-container {
+  width: 99.5vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
 
 .standard-content-box *,
 .standard-content-box *::before,
