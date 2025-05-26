@@ -7,33 +7,41 @@
       data-aos-easing="ease"
   >
     <div class="fourslider container">
-      <div class="slider slider_four_in_line">
-        <!-- 动态渲染新闻项 -->
+      <!-- 动画过渡区域仅包含新闻项容器 -->
+      <transition :name="transitionName" mode="out-in">
         <div
-            v-for="(news, index) in displayedNews"
-            :key="index"
-            class="mtqx-item"
-            @mouseenter="handleMouseEnter(index)"
-            @mouseleave="handleMouseLeave(index)"
+            class="news-container"
+            :key="currentPage"
         >
-          <div class="position-box">
-            <div class="bottom"></div>
-            <a :href="news.link" target="_blank">
-              <div class="cont">
-                <div class="title">
-                  <div class="name">{{ news.source }}</div>
-                  <div class="time">{{ news.date }}</div>
-                </div>
-                <div class="txt">{{ news.content }}</div>
+          <div class="slider_four_in_line">
+            <!-- 动态渲染新闻项 -->
+            <div
+                v-for="(news, index) in displayedNews"
+                :key="index"
+                class="mtqx-item"
+                @mouseenter="handleMouseEnter(index)"
+                @mouseleave="handleMouseLeave(index)"
+            >
+              <div class="position-box">
+                <div class="bottom"></div>
+                <a :href="news.link" target="_blank">
+                  <div class="cont">
+                    <div class="title">
+                      <div class="name">{{ news.source }}</div>
+                      <div class="time">{{ news.date }}</div>
+                    </div>
+                    <div class="txt">{{ news.content }}</div>
+                  </div>
+                </a>
               </div>
-            </a>
+            </div>
           </div>
         </div>
+      </transition>
 
-        <!-- 导航按钮 -->
-        <div class="prev_button" @click="goPrev"></div>
-        <div class="next_button" @click="goNext"></div>
-      </div>
+      <!-- 导航按钮保持在外部，避免参与动画 -->
+      <div class="prev_button" @click="goPrev" aria-label="Previous"></div>
+      <div class="next_button" @click="goNext" aria-label="Next"></div>
     </div>
   </div>
 </template>
@@ -53,6 +61,7 @@ export default {
       currentPage: 0, // 当前页码
       intervalId: null, // 自动轮播定时器
       hoveredIndex: null, // 当前悬浮的新闻项索引
+      direction: 'next', // 动画方向
 
       // 新闻数据示例（共9条）
       newsList: [
@@ -60,19 +69,22 @@ export default {
           source: '新福建',
           date: '2025-04-18',
           link: 'https://share.fjdaily.com/displayTemplate/news/newsDetail/398/3237648.html?isView=true',
-          content: '【新福建】泉州信息工程学院在市教育系统外事暨台港澳事务工作培训会上发言',
+          content:
+              '【新福建】泉州信息工程学院在市教育系统外事暨台港澳事务工作培训会上发言',
         },
         {
           source: '东南网',
           date: '2025-04-10',
           link: 'https://i.fjsen.com/2025-04/10/content_31881174.htm',
-          content: '【东南网】泉州信息工程学院“智慧农业三维可视化平台”获国家级三等奖',
+          content:
+              '【东南网】泉州信息工程学院“智慧农业三维可视化平台”获国家级三等奖',
         },
         {
           source: '新福建',
           date: '2025-04-10',
           link: 'https://share.fjdaily.com/displayTemplate/news/newsDetail/398/3218197.html?isShare=true&advColumnId=398',
-          content: '【新福建】泉州信息工程学院“智慧农业三维可视化平台”获国家级三等奖',
+          content:
+              '【新福建】泉州信息工程学院“智慧农业三维可视化平台”获国家级三等奖',
         },
         {
           source: '东南网',
@@ -85,48 +97,56 @@ export default {
           source: '泉州通',
           date: '2025-04-07',
           link: 'https://share.qztqz.com/pub/template/displayTemplate/news/newsDetail/27/1547940.html?isShare=true',
-          content: '【泉州通】泉州市各部门部署开展深入贯彻中央八项规定精神学习教育',
+          content:
+              '【泉州通】泉州市各部门部署开展深入贯彻中央八项规定精神学习教育',
         },
         {
           source: '东南网',
           date: '2025-04-02',
           link: 'https://i.fjsen.com/2025-04/02/content_31875185.htm?page=pc',
-          content: '【东南网】AI如何重塑教育生态？这场研讨会在泉州召开',
+          content:
+              '【东南网】AI如何重塑教育生态？这场研讨会在泉州召开',
         },
         {
           source: '新福建',
           date: '2025-04-01',
           link: 'https://share.fjdaily.com/displayTemplate/news/newsDetail/398/3200764.html?isShare=true&advColumnId=398',
-          content: '【新福建】AI如何重塑教育生态？这场研讨会在泉州召开',
+          content:
+              '【新福建】AI如何重塑教育生态？这场研讨会在泉州召开',
         },
         {
           source: '台海网',
           date: '2025-04-01',
           link: 'http://m.taihainet.com/news/fujian/shms/2025-04-01/2826901.html',
-          content: '【台海网】AI如何重塑教育生态？这场研讨会在泉州召开',
+          content:
+              '【台海网】AI如何重塑教育生态？这场研讨会在泉州召开',
         },
         {
           source: '新福建',
           date: '2025-04-18',
           link: 'https://share.fjdaily.com/displayTemplate/news/newsDetail/398/3237648.html?isView=true',
-          content: '【新福建】泉州信息工程学院在市教育系统外事暨台港澳事务工作培训会上发言',
+          content:
+              '【新福建】泉州信息工程学院在市教育系统外事暨台港澳事务工作培训会上发言',
         },
       ],
     };
   },
   computed: {
     totalPages() {
-      // 计算总页数，实际上由于循环，这个值不再严格必要，但保留以便参考
-      return this.newsList.length;
+      // 计算总页数，基于每页显示4条新闻
+      return Math.ceil(this.newsList.length / 4);
     },
     displayedNews() {
       // 每页显示4条新闻，循环显示
-      const start = this.currentPage;
+      const start = (this.currentPage * 4) % this.newsList.length;
       const displayed = [];
       for (let i = 0; i < 4; i++) {
         displayed.push(this.newsList[(start + i) % this.newsList.length]);
       }
       return displayed;
+    },
+    transitionName() {
+      return this.direction === 'next' ? 'slide-next' : 'slide-prev';
     },
   },
   mounted() {
@@ -142,11 +162,13 @@ export default {
   },
   methods: {
     goNext() {
-      this.currentPage = (this.currentPage + 4) % this.newsList.length;
+      this.direction = 'next';
+      this.currentPage = (this.currentPage + 1) % this.totalPages;
     },
     goPrev() {
+      this.direction = 'prev';
       this.currentPage =
-          (this.currentPage - 4 + this.newsList.length) % this.newsList.length;
+          (this.currentPage - 1 + this.totalPages) % this.totalPages;
     },
     startAutoSlide() {
       this.intervalId = setInterval(() => {
@@ -196,16 +218,21 @@ export default {
   box-sizing: border-box;
 }
 
+/* 新闻项容器，用于动画 */
+.news-container {
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+
 /* 轮播框架 */
 .slider_four_in_line {
   width: 100%;
   height: 100%;
-  position: relative;
-  overflow: hidden;
-  user-select: none;
   display: flex;
   padding-left: 80px; /* 增加内边距 */
   padding-right: 80px; /* 增加内边距 */
+  transition: transform 0.5s ease;
 }
 
 /* 新闻项样式 */
@@ -216,7 +243,6 @@ export default {
   transition: background-color 0.3s ease;
   position: relative;
   opacity: 1;
-  /* 隐藏动画类可以根据需要添加 */
 }
 
 /* 背景颜色变化 */
@@ -237,7 +263,7 @@ export default {
   left: 0;
   width: 100%;
   height: 0;
-  border-radius: 0.4rem;
+  border-radius: 1.0rem;
   background-color: #fff;
   transform-origin: bottom;
   transition: all 0.5s;
@@ -388,5 +414,38 @@ export default {
     flex: 0 0 100%;
   }
 }
-</style>
 
+/* 切换动画效果 */
+.slide-next-enter-active,
+.slide-next-leave-active,
+.slide-prev-enter-active,
+.slide-prev-leave-active {
+  transition: transform 0.5s ease;
+}
+
+.slide-next-enter-from {
+  transform: translateX(100%);
+}
+.slide-next-enter-to {
+  transform: translateX(0);
+}
+.slide-next-leave-from {
+  transform: translateX(0);
+}
+.slide-next-leave-to {
+  transform: translateX(-100%);
+}
+
+.slide-prev-enter-from {
+  transform: translateX(-100%);
+}
+.slide-prev-enter-to {
+  transform: translateX(0);
+}
+.slide-prev-leave-from {
+  transform: translateX(0);
+}
+.slide-prev-leave-to {
+  transform: translateX(100%);
+}
+</style>
