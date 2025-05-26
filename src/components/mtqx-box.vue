@@ -204,6 +204,8 @@ export default {
   overflow: hidden;
   user-select: none;
   display: flex;
+  padding-left: 80px; /* 增加内边距 */
+  padding-right: 80px; /* 增加内边距 */
 }
 
 /* 新闻项样式 */
@@ -281,9 +283,8 @@ export default {
 .prev_button {
   position: absolute;
   top: 50%;
-  width: 50px;
-  height: 50px;
-  opacity: 0.5;
+  width: 50px; /* 根据需要调整按钮大小 */
+  height: 50px; /* 根据需要调整按钮大小 */
   z-index: 5000;
   cursor: pointer;
   text-align: center;
@@ -293,11 +294,11 @@ export default {
 }
 
 .next_button {
-  right: 10px;
+  right: 20px; /* 调整与右侧内边距的距离 */
 }
 
 .prev_button {
-  left: 10px;
+  left: 20px; /* 调整与左侧内边距的距离 */
 }
 
 /* 箭头样式 */
@@ -325,8 +326,28 @@ export default {
 
 /* 响应式设计 */
 @media (max-width: 1200px) {
+  .slider_four_in_line {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
   .mtqx-item {
     flex: 0 0 25%;
+  }
+
+  .next_button,
+  .prev_button {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+  }
+
+  .next_button {
+    right: 15px;
+  }
+
+  .prev_button {
+    left: 15px;
   }
 }
 
@@ -337,8 +358,28 @@ export default {
 }
 
 @media (max-width: 768px) {
+  .slider_four_in_line {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
   .mtqx-item {
     flex: 0 0 50%;
+  }
+
+  .next_button,
+  .prev_button {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+  }
+
+  .next_button {
+    right: 10px;
+  }
+
+  .prev_button {
+    left: 10px;
   }
 }
 
@@ -348,3 +389,4 @@ export default {
   }
 }
 </style>
+
