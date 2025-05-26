@@ -1,0 +1,75 @@
+{
+  "carouselSlides": [
+    {
+      "image": "/src/assets/img/fc3b55c6f2.jpeg",
+      "title": "福建省教师教学创新大赛，泉信获奖！",
+      "link": "https://mp.weixin.qq.com/s/QaVchhCqiyg5tPgFF9J9Cw"
+    },
+    {
+      "image": "/src/assets/img/cb5c8e6a78.jpg",
+      "title": "燃！这是泉信学子的荣耀时刻！",
+      "link": "https://mp.weixin.qq.com/s/2PzNXNVU3ePLcTOqcvxQFA"
+    },
+    {
+      "image": "/src/assets/img/d5fbe229ca.jpg",
+      "title": "青春向未来 薪火启新程｜泉信五四青年演讲大赛圆满落幕",
+      "link": "https://mp.weixin.qq.com/s/_T3ejJcDo4v-ZT_9WpunNw"
+    }
+  ],
+  "leftNewsPanels": [
+    {
+      "image": "/src/assets/img/47ecad9538.jpg",
+      "title": "教育部专家莅校指导电子信息学科专业建设",
+      "link": "http://www.qzuie.edu.cn/news-show-25521.html"
+    },
+    {
+      "image": "/src/assets/img/1811d5467f.jpg",
+      "title": "165个奖项！“蓝桥杯”大赛泉信学子获佳绩！",
+      "link": "https://mp.weixin.qq.com/s/flOOKNTxxUNz3GF7WOKinw"
+    }
+  ],
+  "rightNewsPanels": [
+    {
+      "image": "/src/assets/img/afa193a54d.jpg",
+      "title": "考研分享｜李立凯：人生不是单一赛道，多维跨界才更精彩",
+      "link": "https://mp.weixin.qq.com/s/RuUI25swCnbPcv38FCgrrQ"
+    },
+    {
+      "image": "/src/assets/img/9611a43567.jpg",
+      "title": "考研分享｜邱超：用军旅生涯锻造的钢铁意志，穿过公安联考的千军万马",
+      "link": "https://mp.weixin.qq.com/s/iwcwSH2uf8cWNjULgWNmDQ"
+    }
+  ],
+  "newsList": [
+    {
+      "day": "07",
+      "month": "2025-05",
+      "title": "毕业季｜以一场欢歌，送你们逐梦远行",
+      "link": "https://mp.weixin.qq.com/s/8tUU6ujj2u5GQ6oGjGgwOA"
+    },
+    {
+      "day": "07",
+      "month": "2025-05",
+      "title": "泉信这场全英文主题班会，很international..",
+      "link": "https://mp.weixin.qq.com/s/NckvE3HEX4mRPOFV08RqZQ"
+    },
+    {
+      "day": "01",
+      "month": "2025-05",
+      "title": "劳动节，致敬每一位平凡而努力的泉信人",
+      "link": "https://mp.weixin.qq.com/s/ZxuqSUwRYM6vDXW7C1PUiw"
+    },
+    {
+      "day": "29",
+      "month": "2025-04",
+      "title": "我校召开2025年企业学习项目现场经验交流会",
+      "link": "http://www.qzuie.edu.cn/news-show-25506.html"
+    },
+    {
+      "day": "29",
+      "month": "2025-04",
+      "title": "考研分享｜揭雪飞：在闽南屋檐下画一条学术脊线",
+      "link": "https://mp.weixin.qq.com/s/AE03pxkSaXkoVGUuDrQ2ng"
+    }
+  ]
+}

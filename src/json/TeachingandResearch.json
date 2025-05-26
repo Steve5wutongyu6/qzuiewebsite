@@ -1,0 +1,41 @@
+{
+  "titleIcon": "/src/assets/img/title-icon.png",
+  "mengImage": "/src/assets/img/meng.png",
+  "slides": [
+    {
+      "image": "/src/assets/img/fc3b55c6f2.jpeg",
+      "title": "福建省教师教学创新大赛，泉信获奖！",
+      "link": "https://mp.weixin.qq.com/s/QaVchhCqiyg5tPgFF9J9Cw"
+    },
+    {
+      "image": "/src/assets/img/1811d5467f.jpg",
+      "title": "165个奖项！“蓝桥杯”大赛泉信学子获佳绩！",
+      "link": "https://mp.weixin.qq.com/s/flOOKNTxxUNz3GF7WOKinw"
+    },
+    {
+      "image": "/src/assets/img/21660adb8b.jpg",
+      "title": "市调逐梦 青春焕彩｜我校成功举办“正大杯”第十五届全国大学生市场调查与分析大赛省赛",
+      "link": "https://mp.weixin.qq.com/s/jcwdxtOGvOc82Tt-WlAhHw"
+    }
+  ],
+  "rightNewsItems": [
+    {
+      "image": "/src/assets/img/85f1d1f3d2.jpg",
+      "title": "两份榜单出炉，泉信拿下双第一！",
+      "link": "https://mp.weixin.qq.com/s/3R4z__y9Twpe8v7FKCqW5g",
+      "date": "2025.04.16"
+    },
+    {
+      "image": "/src/assets/img/43424ef12d.jpeg",
+      "title": "千余所高校角逐，泉信斩获16个奖项！",
+      "link": "https://mp.weixin.qq.com/s/7ZF6ZLi-HIfATmsdjn0sIw",
+      "date": "2025.04.02"
+    },
+    {
+      "image": "/src/assets/img/341e2ef8d4.jpg",
+      "title": "把课堂搬进传统历史街区，这样的实践教学你心动了吗？",
+      "link": "https://mp.weixin.qq.com/s/aUzuEO9HyHWmRJOwNbHB2w",
+      "date": "2025.03.26"
+    }
+  ]
+}

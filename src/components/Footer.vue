@@ -70,7 +70,7 @@
       </div>
 
       <!-- 版权信息 -->
-      <div class="copyright">2203260111 吴同宇 版权所有 © 泉州信息工程学院 备案号：闽ICP备05015349号</div>
+      <div class="copyright">2203260111 吴同宇 版权所有 © 假的泉州信息工程学院 备案号：闽ICP备05015349号</div>
     </div>
   </footer>
 </template>

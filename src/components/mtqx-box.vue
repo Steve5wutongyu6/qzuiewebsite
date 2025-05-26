@@ -53,6 +53,7 @@
  */
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import axios from 'axios'; // 引入 axios
 
 export default {
   name: 'MtqxBox',
@@ -63,72 +64,7 @@ export default {
       hoveredIndex: null, // 当前悬浮的新闻项索引
       direction: 'next', // 动画方向
 
-      // 新闻数据示例（共9条）
-      newsList: [
-        {
-          source: '新福建',
-          date: '2025-04-18',
-          link: 'https://share.fjdaily.com/displayTemplate/news/newsDetail/398/3237648.html?isView=true',
-          content:
-              '【新福建】泉州信息工程学院在市教育系统外事暨台港澳事务工作培训会上发言',
-        },
-        {
-          source: '东南网',
-          date: '2025-04-10',
-          link: 'https://i.fjsen.com/2025-04/10/content_31881174.htm',
-          content:
-              '【东南网】泉州信息工程学院“智慧农业三维可视化平台”获国家级三等奖',
-        },
-        {
-          source: '新福建',
-          date: '2025-04-10',
-          link: 'https://share.fjdaily.com/displayTemplate/news/newsDetail/398/3218197.html?isShare=true&advColumnId=398',
-          content:
-              '【新福建】泉州信息工程学院“智慧农业三维可视化平台”获国家级三等奖',
-        },
-        {
-          source: '东南网',
-          date: '2025-04-07',
-          link: 'http://qz.fjsen.com/2025-04/07/content_31878098.htm',
-          content:
-              '【东南网】泉州市各部门部署开展深入贯彻中央八项规定精神学习教育 高标准严要求推动..',
-        },
-        {
-          source: '泉州通',
-          date: '2025-04-07',
-          link: 'https://share.qztqz.com/pub/template/displayTemplate/news/newsDetail/27/1547940.html?isShare=true',
-          content:
-              '【泉州通】泉州市各部门部署开展深入贯彻中央八项规定精神学习教育',
-        },
-        {
-          source: '东南网',
-          date: '2025-04-02',
-          link: 'https://i.fjsen.com/2025-04/02/content_31875185.htm?page=pc',
-          content:
-              '【东南网】AI如何重塑教育生态？这场研讨会在泉州召开',
-        },
-        {
-          source: '新福建',
-          date: '2025-04-01',
-          link: 'https://share.fjdaily.com/displayTemplate/news/newsDetail/398/3200764.html?isShare=true&advColumnId=398',
-          content:
-              '【新福建】AI如何重塑教育生态？这场研讨会在泉州召开',
-        },
-        {
-          source: '台海网',
-          date: '2025-04-01',
-          link: 'http://m.taihainet.com/news/fujian/shms/2025-04-01/2826901.html',
-          content:
-              '【台海网】AI如何重塑教育生态？这场研讨会在泉州召开',
-        },
-        {
-          source: '新福建',
-          date: '2025-04-18',
-          link: 'https://share.fjdaily.com/displayTemplate/news/newsDetail/398/3237648.html?isView=true',
-          content:
-              '【新福建】泉州信息工程学院在市教育系统外事暨台港澳事务工作培训会上发言',
-        },
-      ],
+      newsList: [], // 新闻数据将从 JSON 文件中获取
     };
   },
   computed: {
@@ -137,6 +73,7 @@ export default {
       return Math.ceil(this.newsList.length / 4);
     },
     displayedNews() {
+      if (this.newsList.length === 0) return [];
       // 每页显示4条新闻，循环显示
       const start = (this.currentPage * 4) % this.newsList.length;
       const displayed = [];
@@ -153,6 +90,9 @@ export default {
     // 初始化 AOS 动效
     AOS.init();
 
+    // 从 JSON 文件中获取新闻数据
+    this.fetchNewsData();
+
     // 启动自动轮播，每3秒切换一次
     this.startAutoSlide();
   },
@@ -161,11 +101,22 @@ export default {
     this.stopAutoSlide();
   },
   methods: {
+    async fetchNewsData() {
+      try {
+        // 从json/mtqx-box.json文件中获取新闻数据
+        const response = await axios.get('/src/json/mtqx-box.json');
+        this.newsList = response.data;
+      } catch (error) {
+        console.error('获取新闻数据失败:', error);
+      }
+    },
     goNext() {
+      if (this.newsList.length === 0) return;
       this.direction = 'next';
       this.currentPage = (this.currentPage + 1) % this.totalPages;
     },
     goPrev() {
+      if (this.newsList.length === 0) return;
       this.direction = 'prev';
       this.currentPage =
           (this.currentPage - 1 + this.totalPages) % this.totalPages;
@@ -183,10 +134,12 @@ export default {
     },
     handleMouseEnter(index) {
       this.hoveredIndex = index;
+      this.stopAutoSlide(); // 悬停时停止自动轮播
     },
     handleMouseLeave(index) {
       if (this.hoveredIndex === index) {
         this.hoveredIndex = null;
+        this.startAutoSlide(); // 鼠标离开时恢复自动轮播
       }
     },
   },
@@ -426,12 +379,15 @@ export default {
 .slide-next-enter-from {
   transform: translateX(100%);
 }
+
 .slide-next-enter-to {
   transform: translateX(0);
 }
+
 .slide-next-leave-from {
   transform: translateX(0);
 }
+
 .slide-next-leave-to {
   transform: translateX(-100%);
 }
@@ -439,12 +395,15 @@ export default {
 .slide-prev-enter-from {
   transform: translateX(-100%);
 }
+
 .slide-prev-enter-to {
   transform: translateX(0);
 }
+
 .slide-prev-leave-from {
   transform: translateX(0);
 }
+
 .slide-prev-leave-to {
   transform: translateX(100%);
 }

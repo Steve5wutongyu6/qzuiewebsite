@@ -249,6 +249,7 @@ export default {
   background-repeat: no-repeat;
 }
 
+/*前后切换按钮的svg样式*/
 .prev-icon {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' width='20' height='20' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5L4.25 4l2.5-2.5L5.25 0z'/%3e%3c/svg%3e");
 }
@@ -257,7 +258,6 @@ export default {
   background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http://www.w3.org/2000/svg%22%20fill%3D%22%23fff%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%208%208%22%3E%3Cpath%20d%3D%22M2.75%200l-1.5%201.5L3.75%204l-2.5%202.5L2.75%208l4-4-4-4z%22/%3E%3C/svg%3E');
 }
 
-/* 可选：调整标题的样式以提高可读性 */
 @media (max-width: 768px) {
   .carousel-caption p {
     font-size: 1rem;

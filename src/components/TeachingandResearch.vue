@@ -1,41 +1,3 @@
-<script>
-import titleIconPath from '../assets/img/title-icon.png';
-import mengImagePath from '../assets/img/meng.png';
-// 导入轮播图片
-import img1 from '../assets/img/fc3b55c6f2.jpeg';
-import img2 from '../assets/img/1811d5467f.jpg';
-import img3 from '../assets/img/21660adb8b.jpg';
-import Loop from "./Loop.vue";
-
-export default {
-  name: 'TeachingandResearch',
-  components: { Loop },
-  data() {
-    return {
-      titleIcon: titleIconPath,
-      mengImage: mengImagePath,
-      slides: [
-        {
-          image: img1,
-          title: '福建省教师教学创新大赛，泉信获奖！',
-          link: 'https://mp.weixin.qq.com/s/QaVchhCqiyg5tPgFF9J9Cw',
-        },
-        {
-          image: img2,
-          title: '165个奖项！“蓝桥杯”大赛泉信学子获佳绩！',
-          link: 'https://mp.weixin.qq.com/s/flOOKNTxxUNz3GF7WOKinw',
-        },
-        {
-          image: img3,
-          title: '市调逐梦 青春焕彩｜我校成功举办“正大杯”第十五届全国大学生市场调查与分析大赛省赛 ',
-          link: 'https://mp.weixin.qq.com/s/jcwdxtOGvOc82Tt-WlAhHw',
-        },
-      ],
-    };
-  },
-};
-</script>
-
 <template>
   <div class="standard-content-box aos-init aos-animate" data-aos="fade-up">
     <div class="main-title container">
@@ -67,42 +29,14 @@ export default {
             <!-- 右侧内容区 -->
             <div class="p-4">
               <div class="list-box">
-                <div class="item">
+                <div class="item" v-for="(news, index) in rightNewsItems" :key="index">
                   <div class="img-box">
-                    <img src="../assets/img/85f1d1f3d2.jpg" alt="新闻图片" />
+                    <img :src="news.image" alt="新闻图片" />
                   </div>
                   <div class="txt-box">
                     <div class="txt">
-                      <a href="https://mp.weixin.qq.com/s/3R4z__y9Twpe8v7FKCqW5g">
-                        两份榜单出炉，泉信拿下双第一！
-                      </a>
-                      <span>2025.04.16</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="img-box">
-                    <img src="../assets/img/43424ef12d.jpeg" alt="新闻图片" />
-                  </div>
-                  <div class="txt-box">
-                    <div class="txt">
-                      <a href="https://mp.weixin.qq.com/s/7ZF6ZLi-HIfATmsdjn0sIw">
-                        千余所高校角逐，泉信斩获16个奖项！
-                      </a>
-                      <span>2025.04.02</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="img-box">
-                    <img src="../assets/img/341e2ef8d4.jpg" alt="新闻图片" />
-                  </div>
-                  <div class="txt-box">
-                    <div class="txt">
-                      <a href="https://mp.weixin.qq.com/s/aUzuEO9HyHWmRJOwNbHB2w">
-                        把课堂搬进传统历史街区，这样的实践教学你心动了吗？
-                      </a>
-                      <span>2025.03.26</span>
+                      <a :href="news.link">{{ news.title }}</a>
+                      <span>{{ news.date }}</span>
                     </div>
                   </div>
                 </div>
@@ -114,6 +48,44 @@ export default {
     </div> <!-- end of container -->
   </div> <!-- end of standard-content-box -->
 </template>
+
+<script>
+// 引入 axios
+import axios from 'axios';
+// 引入 Loop 组件
+import Loop from "./Loop.vue";
+
+export default {
+  name: 'TeachingandResearch',
+  components: { Loop },
+  data() {
+    return {
+      titleIcon: '',
+      mengImage: '',
+      slides: [],
+      rightNewsItems: []
+    };
+  },
+  mounted() {
+    // 从 JSON 文件中获取数据
+    this.fetchData();
+  },
+  methods: {
+    async fetchData() {
+      try {
+        const response = await axios.get('/src/json/TeachingandResearch.json');
+        const data = response.data;
+        this.titleIcon = data.titleIcon;
+        this.mengImage = data.mengImage;
+        this.slides = data.slides;
+        this.rightNewsItems = data.rightNewsItems;
+      } catch (error) {
+        console.error('获取教学科研数据失败:', error);
+      }
+    }
+  }
+};
+</script>
 
 <style scoped>
 .standard-content-box {
@@ -273,7 +245,7 @@ export default {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-carouselExampleIndicators2 {
+.carouselExampleIndicators2 {
   height: 100%;
 }
 

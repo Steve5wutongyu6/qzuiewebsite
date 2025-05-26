@@ -180,7 +180,7 @@ export default {
 }
 
 .tit > div {
-  padding-left: 8.48px;
+  padding-left: 8px;
   display: block;
   align-items: center;
 }
