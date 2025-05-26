@@ -13,7 +13,7 @@ import IntheMedia from "./components/IntheMedia.vue";
 import QUIENews from "./components/QUIENews.vue";
 import BackgroundImg from "./assets/img/bg.png"
 
-/*滚动监听逻辑*/
+/*动态导航栏滚动监听逻辑*/
 const isScrolled = ref(false);
 const scrollThreshold = 100; // 滚动阈值（像素）
 
@@ -68,7 +68,8 @@ onUnmounted(() => {
   <Footer/>
 </template>
 
-<style scoped>.app-container {
+<style scoped>
+.app-container {
   position: relative;
   width: 100%;
   min-height: 100vh;

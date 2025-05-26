@@ -11,10 +11,11 @@
       </div>
       <div class="nav-right">
         <div class="link-box">
-          <a href="">学生</a><span>|</span>
-          <a href="">教工</a><span>|</span>
+          <a href="https://pass.qzuie.edu.cn/">信息门户</a><span>|</span>
+          <a href="https://jwgl.qzuie.edu.cn/Logon.do?method=logon&issso=1"> 教务系统</a><span>|</span>
+          <a href="http://oa.qzuie.edu.cn:9081/">OA</a><span>|</span>
+          <a href="https://mail.qzuie.edu.cn/">电子邮件</a><span>|</span>
           <a href="https://xyh.qzuie.edu.cn/">校友</a><span>|</span>
-          <a href="">访客</a><span>|</span>
           <a href="https://www.qzuie.edu.cn/news-show-20744.html">校长信箱</a><span>|</span>
           <a href="https://lib.qzuie.edu.cn">图书馆</a>
         </div>
