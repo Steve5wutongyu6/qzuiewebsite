@@ -11,7 +11,6 @@ import FeaturesOfQzuie from "./components/FeaturesOfQzuie.vue";
 import TeachingandResearch from "./components/TeachingandResearch.vue";
 import IntheMedia from "./components/IntheMedia.vue";
 import QUIENews from "./components/QUIENews.vue";
-import BackgroundImg from "./assets/img/bg.png"
 
 /*动态导航栏滚动监听逻辑*/
 const isScrolled = ref(false);

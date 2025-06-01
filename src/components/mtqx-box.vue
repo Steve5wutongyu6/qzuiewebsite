@@ -262,13 +262,14 @@ export default {
 .prev_button {
   position: absolute;
   top: 50%;
-  width: 50px; /* 根据需要调整按钮大小 */
-  height: 50px; /* 根据需要调整按钮大小 */
+  width: 50px;
+  height: 50px;
   z-index: 5000;
   cursor: pointer;
   text-align: center;
   line-height: 50px;
   border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0) !important;
   transform: translateY(-50%);
 }
 
@@ -295,12 +296,12 @@ export default {
 
 .next_button::after {
   border-width: 10px 0 10px 15px;
-  border-color: transparent transparent transparent #000;
+  border-color: transparent transparent transparent whitesmoke;
 }
 
 .prev_button::after {
   border-width: 10px 15px 10px 0;
-  border-color: transparent #000 transparent transparent;
+  border-color: transparent whitesmoke transparent transparent;
 }
 
 /* 响应式设计 */
